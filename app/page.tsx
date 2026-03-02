@@ -27,12 +27,13 @@ const Section = ({ children, className = "", id = "" }: { children: React.ReactN
   </section>
 );
 
-const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
+const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay, ease: [0.21, 0.45, 0.32, 0.9] }}
+    className={className}
   >
     {children}
   </motion.div>
@@ -61,42 +62,51 @@ export default function LandingPage() {
   return (
     <main className="overflow-hidden">
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://picsum.photos/1920/1080?grayscale&blur=2"
-            alt="Background"
-            fill
-            className="object-cover opacity-10"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#fdfcfb] via-transparent to-[#fdfcfb]" />
-        </div>
+      <section className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-[#fdfcfb]">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col lg:flex-row items-center justify-between gap-12">
+          {/* Text Column (Left) */}
+          <div className="w-full lg:w-1/2 text-left order-1 lg:order-1 pt-12 lg:pt-0">
+            <FadeIn>
+              <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold tracking-[0.2em] uppercase border border-[#2a2a2a]/20 rounded-full text-[#2a2a2a]/60">
+                Terapia & Mentoria
+              </span>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-[#2a2a2a] leading-[1.1] mb-8 text-balance">
+                Encontre a força real para <span className="italic">reconstruir</span> sua vida.
+              </h1>
+              <p className="text-lg md:text-xl text-[#555] mb-12 leading-relaxed font-sans">
+                Uma abordagem terapêutica profunda para quem cansou de repetir padrões e decidiu assumir o protagonismo da própria história — sem atalhos, com verdade.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-start gap-4">
+                <Button primary className="w-full sm:w-auto" onClick={() => document.getElementById('problemas')?.scrollIntoView({ behavior: 'smooth' })}>
+                  AGENDAR MINHA SESSÃO <ArrowRight size={18} />
+                </Button>
+              </div>
+            </FadeIn>
+          </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-          <FadeIn>
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold tracking-[0.2em] uppercase border border-[#2a2a2a]/20 rounded-full text-[#2a2a2a]/60">
-              Terapia & Mentoria
-            </span>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#2a2a2a] leading-[1.1] mb-8 text-balance">
-              Encontre a força real para <span className="italic">reconstruir</span> sua vida.
-            </h1>
-            <p className="text-lg md:text-xl text-[#555] max-w-2xl mx-auto mb-12 leading-relaxed font-sans">
-              Uma abordagem terapêutica profunda para quem cansou de repetir padrões e decidiu assumir o protagonismo da própria história — sem atalhos, com verdade.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button primary className="w-full sm:w-auto" onClick={() => document.getElementById('problemas')?.scrollIntoView({ behavior: 'smooth' })}>
-                AGENDAR MINHA SESSÃO <ArrowRight size={18} />
-              </Button>
-            </div>
-          </FadeIn>
+          {/* Photo Column (Right) */}
+          <div className="w-full lg:w-1/2 flex justify-center lg:justify-end order-2 lg:order-2">
+            <FadeIn delay={0.2} className="w-full flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-md aspect-[4/5] rounded-tl-[80px] rounded-br-[80px] overflow-hidden shadow-2xl bg-gray-100">
+                <Image
+                  src="https://i.imgur.com/hizCq9I.jpeg"
+                  alt="Christiane Bernal"
+                  fill
+                  quality={100}
+                  className="object-cover"
+                  referrerPolicy="no-referrer"
+                  priority
+                />
+              </div>
+            </FadeIn>
+          </div>
         </div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#2a2a2a]/30 animate-bounce cursor-pointer"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#2a2a2a]/30 animate-bounce cursor-pointer"
           onClick={() => document.getElementById('problemas')?.scrollIntoView({ behavior: 'smooth' })}
         >
           <ChevronDown size={32} />
@@ -195,11 +205,12 @@ export default function LandingPage() {
       <Section className="bg-[#2a2a2a] text-[#fdfcfb]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <FadeIn>
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000">
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-[#1a1a1a]">
               <Image
-                src="https://picsum.photos/800/1000?grayscale"
+                src="https://i.imgur.com/GSsppFn.jpeg"
                 alt="Christiane Bernal"
                 fill
+                quality={100}
                 className="object-cover"
                 referrerPolicy="no-referrer"
               />

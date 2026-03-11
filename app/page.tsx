@@ -339,7 +339,7 @@ export default function LandingPage() {
             </p>
             <div className="flex justify-center">
               <motion.a
-                href="https://wa.me/553497324013?text=Ol%C3%A1!%20Vim%20do%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20terapia."
+                href="https://wa.me/5534992272352?text=Ol%C3%A1!%20Vim%20do%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20terapia."
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
